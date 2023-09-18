@@ -9,6 +9,6 @@ output:
 
 
 
-## Project thoughts
+## Project Thoughts
 
 I am interested in exploring data related to public opinion on the Supreme Court, especially given the recent decisions on abortion, affirmative action, and environmental regulations. How have popular views/ratings of the Supreme Court changed over the past decade or so? How do these opinions differ by age, partisan ideology, education, location, specific political issues, etc?
