@@ -11,7 +11,7 @@ Over the past decade, how has political ideology affected changes in public appr
 
 For each of the data sets, I first created a data visualization of approval ratings of the Supreme Court by political ideology (using proportions).
 
-```{r, echo=FALSE}
+```{r}
 library(haven)
 library(tidyverse)
 library(dplyr)
@@ -21,7 +21,7 @@ library(ggplot2)
 
 
 
-```{r, echo=FALSE}
+```{r}
 july19 <- read_sav("W52_Jul19/ATP W52.sav")
 
 july19 <- july19 |>
@@ -56,7 +56,7 @@ ggplot(july19_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political
 
 
 
-```{r, echo=FALSE}
+```{r}
 jan20 <- read_sav("W59_Jan20/ATP W59.sav")
 
 jan20 <- jan20 |>
@@ -91,7 +91,7 @@ ggplot(jan20_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political_
 
 
 
-```{r, echo=FALSE}
+```{r}
 july20 <- read_sav("W71_Jul20/ATP W71.sav")
 
 july20 <- july20 |>
@@ -126,7 +126,7 @@ ggplot(july20_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political
 
 
 
-```{r, echo=FALSE}
+```{r}
 april21 <- read_sav("W87_Apr21/ATP W87.sav")
 
 april21 <- april21 |>
@@ -161,7 +161,7 @@ ggplot(april21_prop, mapping = aes(x = scotus_opinion, y = prop, fill = politica
 
 
 
-```{r, echo=FALSE}
+```{r}
 jan22 <- read_sav("W101_Jan22/ATP W101.sav")
 
 jan22 <- jan22 |>
