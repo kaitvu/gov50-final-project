@@ -9,32 +9,29 @@ output:
 
 Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). Overall, I expect that public approval of the Court has decreased across both parties over the past 10 years. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents: the variable can be coded =1 for liberal and =0 for conservative. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can measure by calculating percent change or measuring linear regression. If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among liberals than conservatives over 10 years, this would support my hypothesis. On the other hand, If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among conservatives than liberals over 10 years, this would provide evidence against my hypothesis.
 
-For each of the data sets, I first created a data visualization of approval ratings of the Supreme Court by political ideology (using proportions).
+For each of the data sets, I first created a data visualization of approval ratings of the Supreme Court by political ideology (using proportions). Then, I created data visualizations to show the changes in favorable and unfavorable opinions on the Supreme Court over time.
 
 ```{r}
 library(haven)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-
 ```
-
 
 
 ```{r}
 july19 <- read_sav("W52_Jul19/ATP W52.sav")
 
 july19 <- july19 |>
-  mutate(scotus_opinion = case_when(INSTFAVd_W52 == 1 ~ "Very Favorable", 
-                                    INSTFAVd_W52 == 2 ~ "Mostly Favorable", 
-                                    INSTFAVd_W52 == 3 ~ "Mostly Unfavorable",
-                                    INSTFAVd_W52 == 4 ~ "Very Unfavorable"),
+  mutate(scotus_opinion = case_when(INSTFAVd_W52 <= 2 ~ "Favorable",
+                                    INSTFAVd_W52 >= 3 ~ "Unfavorable"),
          political_ideology = case_when(F_IDEO <= 2 ~ "Conservative", 
                                         F_IDEO == 3 ~ "Moderate", 
                                         F_IDEO >= 4 ~ "Liberal", 
-                                        F_IDEO == 99 ~ "Not Disclosed"))
+                                        F_IDEO == 99 ~ "Not Disclosed")) |>
+  filter(!is.na(scotus_opinion))
 
-july19$scotus_opinion <- factor(july19$scotus_opinion, levels=c("Very Favorable", "Mostly Favorable", "Mostly Unfavorable", "Very Unfavorable"))
+july19$scotus_opinion <- factor(july19$scotus_opinion, levels=c("Favorable", "Unfavorable"))
 
 july19_prop <- july19 |>
   group_by(scotus_opinion, political_ideology) |>
@@ -60,16 +57,15 @@ ggplot(july19_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political
 jan20 <- read_sav("W59_Jan20/ATP W59.sav")
 
 jan20 <- jan20 |>
-  mutate(scotus_opinion = case_when(INSTFAV_d_W59 == 1 ~ "Very Favorable", 
-                                    INSTFAV_d_W59 == 2 ~ "Mostly Favorable", 
-                                    INSTFAV_d_W59 == 3 ~ "Mostly Unfavorable",
-                                    INSTFAV_d_W59 == 4 ~ "Very Unfavorable"),
+  mutate(scotus_opinion = case_when(INSTFAV_d_W59 <= 2 ~ "Favorable", 
+                                    INSTFAV_d_W59  >= 3 ~ "Unfavorable"),
          political_ideology = case_when(F_IDEO <= 2 ~ "Conservative", 
                                         F_IDEO == 3 ~ "Moderate", 
                                         F_IDEO >= 4 ~ "Liberal", 
-                                        F_IDEO == 99 ~ "Not Disclosed"))
+                                        F_IDEO == 99 ~ "Not Disclosed")) |>
+  filter(!is.na(scotus_opinion))
 
-jan20$scotus_opinion <- factor(jan20$scotus_opinion, levels=c("Very Favorable", "Mostly Favorable", "Mostly Unfavorable", "Very Unfavorable"))
+jan20$scotus_opinion <- factor(jan20$scotus_opinion, levels=c("Favorable", "Unfavorable"))
 
 jan20_prop <- jan20 |>
   group_by(scotus_opinion, political_ideology) |>
@@ -95,16 +91,15 @@ ggplot(jan20_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political_
 july20 <- read_sav("W71_Jul20/ATP W71.sav")
 
 july20 <- july20 |>
-  mutate(scotus_opinion = case_when(INSTFAV_d_W71 == 1 ~ "Very Favorable", 
-                                    INSTFAV_d_W71 == 2 ~ "Mostly Favorable", 
-                                    INSTFAV_d_W71 == 3 ~ "Mostly Unfavorable",
-                                    INSTFAV_d_W71 == 4 ~ "Very Unfavorable"),
+  mutate(scotus_opinion = case_when(INSTFAV_d_W71 <= 2 ~ "Favorable", 
+                                    INSTFAV_d_W71  >= 3 ~ "Unfavorable"),
          political_ideology = case_when(F_IDEO <= 2 ~ "Conservative", 
                                         F_IDEO == 3 ~ "Moderate", 
                                         F_IDEO >= 4 ~ "Liberal", 
-                                        F_IDEO == 99 ~ "Not Disclosed"))
+                                        F_IDEO == 99 ~ "Not Disclosed")) |>
+  filter(!is.na(scotus_opinion))
 
-july20$scotus_opinion <- factor(july20$scotus_opinion, levels=c("Very Favorable", "Mostly Favorable", "Mostly Unfavorable", "Very Unfavorable"))
+july20$scotus_opinion <- factor(july20$scotus_opinion, levels=c("Favorable", "Unfavorable"))
 
 july20_prop <- july20 |>
   group_by(scotus_opinion, political_ideology) |>
@@ -130,16 +125,15 @@ ggplot(july20_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political
 april21 <- read_sav("W87_Apr21/ATP W87.sav")
 
 april21 <- april21 |>
-  mutate(scotus_opinion = case_when(INSTFAV_d_W87 == 1 ~ "Very Favorable", 
-                                    INSTFAV_d_W87 == 2 ~ "Mostly Favorable", 
-                                    INSTFAV_d_W87 == 3 ~ "Mostly Unfavorable",
-                                    INSTFAV_d_W87 == 4 ~ "Very Unfavorable"),
+  mutate(scotus_opinion = case_when(INSTFAV_d_W87 <= 2 ~ "Favorable", 
+                                    INSTFAV_d_W87 >= 3 ~ "Unfavorable"),
          political_ideology = case_when(F_IDEO <= 2 ~ "Conservative", 
                                         F_IDEO == 3 ~ "Moderate", 
                                         F_IDEO >= 4 ~ "Liberal", 
-                                        F_IDEO == 99 ~ "Not Disclosed"))
+                                        F_IDEO == 99 ~ "Not Disclosed")) |>
+  filter(!is.na(scotus_opinion))
 
-april21$scotus_opinion <- factor(april21$scotus_opinion, levels=c("Very Favorable", "Mostly Favorable", "Mostly Unfavorable", "Very Unfavorable"))
+april21$scotus_opinion <- factor(april21$scotus_opinion, levels=c("Favorable", "Unfavorable"))
 
 april21_prop <- april21 |>
   group_by(scotus_opinion, political_ideology) |>
@@ -165,16 +159,15 @@ ggplot(april21_prop, mapping = aes(x = scotus_opinion, y = prop, fill = politica
 jan22 <- read_sav("W101_Jan22/ATP W101.sav")
 
 jan22 <- jan22 |>
-  mutate(scotus_opinion = case_when(INSTFAV_d_W101 == 1 ~ "Very Favorable", 
-                                    INSTFAV_d_W101 == 2 ~ "Mostly Favorable", 
-                                    INSTFAV_d_W101 == 3 ~ "Mostly Unfavorable",
-                                    INSTFAV_d_W101 == 4 ~ "Very Unfavorable"),
+  mutate(scotus_opinion = case_when(INSTFAV_d_W101 <= 2 ~ "Favorable", 
+                                    INSTFAV_d_W101 >= 3 ~ "Unfavorable"),
          political_ideology = case_when(F_IDEO <= 2 ~ "Conservative", 
                                         F_IDEO == 3 ~ "Moderate", 
                                         F_IDEO >= 4 ~ "Liberal", 
-                                        F_IDEO == 99 ~ "Not Disclosed"))
+                                        F_IDEO == 99 ~ "Not Disclosed")) |>
+  filter(!is.na(scotus_opinion))
 
-jan22$scotus_opinion <- factor(jan22$scotus_opinion, levels=c("Very Favorable", "Mostly Favorable", "Mostly Unfavorable", "Very Unfavorable"))
+jan22$scotus_opinion <- factor(jan22$scotus_opinion, levels=c("Favorable", "Unfavorable"))
 
 jan22_prop <- jan22 |>
   group_by(scotus_opinion, political_ideology) |>
@@ -193,3 +186,44 @@ ggplot(jan22_prop, mapping = aes(x = scotus_opinion, y = prop, fill = political_
     y = "Proportion of Respondents") +
   theme(axis.text.x = element_text(vjust=0.6, angle = 45))
 ```
+
+
+
+```{r}
+d1 <- rbind.data.frame(july19_prop, jan20_prop, july20_prop, april21_prop, jan22_prop)
+d1$date = c(rep("July19", 6), rep("Jan20", 6), rep("July20", 6), rep("April21", 6), rep("Jan22", 6))
+
+d1 <- d1[d1$scotus_opinion == "Favorable", ]
+
+d1$date <- ordered(d1$date, levels = c("July19", "Jan20", "July20", "April21", "Jan22"))
+
+d1 |>
+  ggplot(mapping = aes(x = factor(date), y = prop, group = political_ideology, color = political_ideology)) + 
+  geom_line() +
+  geom_point() +
+  scale_color_manual(name = "Political Ideology", values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
+  labs(
+    title = "Favorable Public Opinion on the Supreme Court by Political Ideology", 
+    x = "Date (Month & Year)", 
+    y = "Proportion of Respondents")
+```
+
+```{r}
+d1 <- rbind.data.frame(july19_prop, jan20_prop, july20_prop, april21_prop, jan22_prop)
+d1$date = c(rep("July19", 6), rep("Jan20", 6), rep("July20", 6), rep("April21", 6), rep("Jan22", 6))
+
+d2 <- d1[d1$scotus_opinion == "Unfavorable", ]
+
+d2$date <- ordered(d2$date, levels = c("July19", "Jan20", "July20", "April21", "Jan22"))
+
+d2 |>
+  ggplot(mapping = aes(x = factor(date), y = prop, group = political_ideology, color = political_ideology)) + 
+  geom_line() +
+  geom_point() +
+  scale_color_manual(name = "Political Ideology", values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
+  labs(
+    title = "Unfavorable Public Opinion on the Supreme Court by Political Ideology", 
+    x = "Date (Month & Year)", 
+    y = "Proportion of Respondents")
+```
+
