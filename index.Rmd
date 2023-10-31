@@ -7,9 +7,9 @@ output:
     self_contained: false
 ---
 
-Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). Overall, I expect that public approval of the Court has decreased across both parties over the past 10 years. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents: the variable can be coded =1 for liberal and =0 for conservative. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can measure by calculating percent change or measuring linear regression. If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among liberals than conservatives over 10 years, this would support my hypothesis. On the other hand, If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among conservatives than liberals over 10 years, this would provide evidence against my hypothesis.
+Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). Overall, I expect that public approval of the Court has decreased across both parties over the past 10 years. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents: the variable can be coded =1 for liberal and =0 for conservative. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can measure by calculating percent change. If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among liberals than conservatives over 10 years, this would support my hypothesis. On the other hand, If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among conservatives than liberals over 10 years, this would provide evidence against my hypothesis.
 
-By political ideology (using proportions), I created data visualizations to show the changes in favorable and unfavorable opinions on the Supreme Court over time by political ideology.
+By political ideology (using proportions), I created data visualizations to show the changes in favorable and unfavorable opinions on the Supreme Court over time by political ideology. Then, I made two data visualizations to show the overall changes in favorable and unfavorable opinions on the Supreme Court over time (not grouped by ideology). 
 
 ```{r}
 library(haven)
@@ -185,6 +185,39 @@ d2 |>
   scale_color_manual(name = "Political Ideology", values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
   labs(
     title = "Unfavorable Public Opinion on the Supreme Court by Political Ideology", 
+    x = "Date (Month & Year)", 
+    y = "Proportion of Respondents")
+```
+
+```{r}
+library(readr)
+d3 <- read_csv("~/Downloads/GOV50 Data - Sheet1.csv")
+
+d3 <- d3 |>
+  group_by(Date) |>
+  mutate(fav_prop = Favorable/(Favorable + Unfavorable), 
+         unfav_prop = Unfavorable/(Favorable + Unfavorable))
+
+d3$Date <- as.character(d3$Date)
+d3$Date <- factor(d3$Date, levels=unique(d3$Date))
+
+d3 |>
+  ggplot(mapping = aes(x = Date, y = fav_prop)) +
+  geom_point() +
+  geom_line(aes(group=1)) +
+  labs(
+  title = "Favorable Public Opinion on the Supreme Court Over Time", 
+  x = "Date (Month & Year)", 
+  y = "Proportion of Respondents")
+```
+
+```{r}
+d3 |>
+  ggplot(mapping = aes(x = factor(Date), y = unfav_prop)) + 
+  geom_point() +
+  geom_line(aes(group=1)) +
+  labs(
+    title = "Unfavorable Public Opinion on the Supreme Court Over Time", 
     x = "Date (Month & Year)", 
     y = "Proportion of Respondents")
 ```
