@@ -7,11 +7,11 @@ output:
     self_contained: false
 ---
 
-Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). Overall, I expect that public approval of the Court has decreased across both parties over the past 10 years. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents: the variable can be coded =1 for liberal and =0 for conservative. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can measure by calculating percent change. If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among liberals than conservatives over 10 years, this would support my hypothesis. On the other hand, If I observe a larger percent change in unfavorable approval ratings for the Supreme Court among conservatives than liberals over 10 years, this would provide evidence against my hypothesis.
+Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). Overall, I expect that public approval of the Court has decreased across both parties in the past decade. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can measure by calculating percent change. If I observe a larger percent decrease in favorable approval ratings for the Supreme Court among liberals than conservatives over the time period, this would support my hypothesis. On the other hand, If I observe a larger percent increase in favorable approval ratings for the Supreme Court among conservatives than liberals, this would provide evidence against my hypothesis.
 
-By political ideology (using proportions), I created data visualizations to show the changes in favorable and unfavorable opinions on the Supreme Court over time by political ideology. Then, I made two data visualizations to show the overall changes in favorable and unfavorable opinions on the Supreme Court over time (not grouped by ideology). 
+By political ideology (using proportions), I created data visualizations to show the changes in favorable and unfavorable opinions on the Supreme Court over time by political ideology. Then, I made data visualizations to show the overall changes in favorable and unfavorable opinions on the Supreme Court over time (not grouped by ideology). 
 
-```{r}
+```{r, echo = FALSE}
 library(haven)
 library(tidyverse)
 library(dplyr)
@@ -19,8 +19,8 @@ library(ggplot2)
 ```
 
 
-```{r}
-july19 <- read_sav("W52_Jul19/ATP W52.sav")
+```{r, echo = FALSE}
+july19 <- read_sav("data/W52_Jul19/ATP W52.sav")
 
 july19 <- july19 |>
   mutate(scotus_opinion = case_when(INSTFAVd_W52 <= 2 ~ "Favorable",
@@ -45,8 +45,8 @@ july19_prop <- july19 |>
 
 
 
-```{r}
-jan20 <- read_sav("W59_Jan20/ATP W59.sav")
+```{r, echo = FALSE}
+jan20 <- read_sav("data/W59_Jan20/ATP W59.sav")
 
 jan20 <- jan20 |>
   mutate(scotus_opinion = case_when(INSTFAV_d_W59 <= 2 ~ "Favorable", 
@@ -71,8 +71,8 @@ jan20_prop <- jan20 |>
 
 
 
-```{r}
-july20 <- read_sav("W71_Jul20/ATP W71.sav")
+```{r, echo = FALSE}
+july20 <- read_sav("data/W71_Jul20/ATP W71.sav")
 
 july20 <- july20 |>
   mutate(scotus_opinion = case_when(INSTFAV_d_W71 <= 2 ~ "Favorable", 
@@ -97,8 +97,8 @@ july20_prop <- july20 |>
 
 
 
-```{r}
-april21 <- read_sav("W87_Apr21/ATP W87.sav")
+```{r, echo = FALSE}
+april21 <- read_sav("data/W87_Apr21/ATP W87.sav")
 
 april21 <- april21 |>
   mutate(scotus_opinion = case_when(INSTFAV_d_W87 <= 2 ~ "Favorable", 
@@ -123,8 +123,8 @@ april21_prop <- april21 |>
 
 
 
-```{r}
-jan22 <- read_sav("W101_Jan22/ATP W101.sav")
+```{r, echo = FALSE}
+jan22 <- read_sav("data/W101_Jan22/ATP W101.sav")
 
 jan22 <- jan22 |>
   mutate(scotus_opinion = case_when(INSTFAV_d_W101 <= 2 ~ "Favorable", 
@@ -149,11 +149,11 @@ jan22_prop <- jan22 |>
 
 
 
-```{r}
-d1 <- rbind.data.frame(july19_prop, jan20_prop, july20_prop, april21_prop, jan22_prop)
-d1$date = c(rep("July19", 6), rep("Jan20", 6), rep("July20", 6), rep("April21", 6), rep("Jan22", 6))
+```{r, echo = FALSE}
+d0 <- rbind.data.frame(july19_prop, jan20_prop, july20_prop, april21_prop, jan22_prop)
+d0$date = c(rep("July19", 6), rep("Jan20", 6), rep("July20", 6), rep("April21", 6), rep("Jan22", 6))
 
-d1 <- d1[d1$scotus_opinion == "Favorable", ]
+d1 <- d0[d0$scotus_opinion == "Favorable", ]
 
 d1$date <- ordered(d1$date, levels = c("July19", "Jan20", "July20", "April21", "Jan22"))
 
@@ -166,15 +166,13 @@ d1 |>
     title = "Favorable Public Opinion on the Supreme Court by Political Ideology", 
     x = "Date (Month & Year)", 
     y = "Proportion of Respondents")
+
 ```
 
 
+```{r, echo = FALSE}
+d2 <- d0[d0$scotus_opinion == "Unfavorable", ]
 
-```{r}
-d1 <- rbind.data.frame(july19_prop, jan20_prop, july20_prop, april21_prop, jan22_prop)
-d1$date = c(rep("July19", 6), rep("Jan20", 6), rep("July20", 6), rep("April21", 6), rep("Jan22", 6))
-
-d2 <- d1[d1$scotus_opinion == "Unfavorable", ]
 
 d2$date <- ordered(d2$date, levels = c("July19", "Jan20", "July20", "April21", "Jan22"))
 
@@ -187,11 +185,54 @@ d2 |>
     title = "Unfavorable Public Opinion on the Supreme Court by Political Ideology", 
     x = "Date (Month & Year)", 
     y = "Proportion of Respondents")
+
 ```
 
+
 ```{r}
+d1_pc <- d1 |>
+  filter(date == "Jan22" | date == "July19") |>
+  group_by(political_ideology) |>
+  pivot_wider(
+    names_from = date, 
+    values_from = prop
+    ) |>
+  mutate(prt_change = (Jan22 - July19)/(July19) * 100) |>
+  select(prt_change)
+
+d1_pc |>
+   knitr::kable(caption = "Percent Change in Favorable Opinion by Political Ideology", col.names = c("Political Ideology", "Percent Change"), digits = 2)
+```
+
+
+
+```{r}
+d2_pc <- d2 |>
+  filter(date == "Jan22" | date == "July19") |>
+  group_by(political_ideology) |>
+  pivot_wider(
+    names_from = date, 
+    values_from = prop
+    ) |>
+  mutate(prt_change = (Jan22 - July19)/(July19) * 100) |>
+  select(prt_change)
+
+d2_pc |>
+   knitr::kable(caption = "Percent Change in Unfavorable Opinion by Political Ideology", col.names = c("Political Ideology", "Percent Change"), digits = 2)
+```
+
+For this project, the null hypothesis states that there is no relationship between respondents identifying as liberal and decreasing favorability in public opinion on the Court over time.
+
+From July 2019 to January 2022, favorable public opinion on the Supreme Court increased by 3.62% among conservative respondents and 6.13% among moderate respondents while decreasing by 16.7% among liberal respondents. Examining changes in favorable public opinion, we reject the null hypothesis in favor of the hypothesis as there is a higher percent decrease in favorable public opinion among liberals than conservatives.
+
+However, unfavorable public opinion on the Supreme Court increased by 23.89% among conservative respondents and 2.93% among moderate respondents while decreasing by 12.16% among liberal respondents. These results are contradictory with those of favorable public opinion: there's a higher percent increase in unfavorable public opinion among conservatives than liberals. 
+
+Since there are contradictory conclusions about the hypothesis depending on if unfavorable or favorable public opinions are analyzed, there seems to be no clear conclusive relationship between political ideology and changes in public opinion of the Supreme Court - at least within the selected five Pew Research Center’s American Trends Panel Waves.
+
+
+```{r, echo = FALSE}
 library(readr)
-d3 <- read_csv("~/Downloads/GOV50 Data - Sheet1.csv")
+d3 <- read_csv("data/GOV50 Data - Sheet1.csv")
 
 d3 <- d3 |>
   group_by(Date) |>
@@ -204,21 +245,72 @@ d3$Date <- factor(d3$Date, levels=unique(d3$Date))
 d3 |>
   ggplot(mapping = aes(x = Date, y = fav_prop)) +
   geom_point() +
-  geom_line(aes(group=1)) +
+  geom_smooth(aes(group=1), method = "lm", se = FALSE) +
   labs(
   title = "Favorable Public Opinion on the Supreme Court Over Time", 
   x = "Date (Month & Year)", 
   y = "Proportion of Respondents")
+
 ```
 
-```{r}
+
+```{r, echo = FALSE}
 d3 |>
-  ggplot(mapping = aes(x = factor(Date), y = unfav_prop)) + 
+  ggplot(mapping = aes(x = Date, y = unfav_prop)) + 
   geom_point() +
-  geom_line(aes(group=1)) +
+  geom_smooth(aes(group=1), method = "lm", se = FALSE) +
   labs(
     title = "Unfavorable Public Opinion on the Supreme Court Over Time", 
     x = "Date (Month & Year)", 
     y = "Proportion of Respondents")
 ```
 
+```{r}
+d3_pc <- d3 |>
+  select(Date, unfav_prop, fav_prop) |>
+  pivot_wider(
+    names_from = Date, 
+    values_from = c(unfav_prop, fav_prop)
+  ) |>
+  summarize(
+    pct_change_f = (fav_prop_July23 - fav_prop_Mar18)/(fav_prop_Mar18) * 100,
+    pct_change_uf = (unfav_prop_July23 - unfav_prop_Mar18)/(unfav_prop_Mar18) * 100
+  )
+
+d3_pc |>
+  knitr::kable(caption = "Percent Change in Public Opinion on the Supreme Court", col.names = c("Percent Change in Favorable Public Opinion", "Percent Change in Unfavorable Public Opinion"), digits = 2)
+```
+
+
+```{r}
+library(broom)
+
+d3_lm_f <- lm(fav_prop ~ Date, data = d3)
+names(d3_lm_f$coefficients) <- c('Mar18','Jan19','July19', 'Jan20', 'July20', 'April21', 'Jan22', 'Aug22', 'Mar23', 'July23')
+
+d3_lm_f |>
+  broom::tidy() |> 
+  select(term, estimate) |> 
+  knitr::kable(
+    caption = "Regression of Favorable Public Opinion",
+    col.names = c("Date", "Estimate"),
+    digits = 2
+    )
+```
+
+```{r}
+d3_lm_uf <- lm(unfav_prop ~ Date, data = d3)
+names(d3_lm_uf$coefficients) <- c('Mar18','Jan19','July19', 'Jan20', 'July20', 'April21', 'Jan22', 'Aug22', 'Mar23', 'July23')
+
+d3_lm_uf |>
+  broom::tidy() |> 
+  select(term, estimate) |> 
+  knitr::kable(
+    caption = "Regression of Unfavorable Public Opinion",
+    col.names = c("Date", "Estimate"),
+    digits = 2
+    )
+```
+
+
+From March 2018 to July 2023, favorable opinion on the Supreme Court decreased by 35.26% while unfavorable opinion increased by 83.12% across all political ideologies. According to the linear regressions, the proportion of residents with favorable opinions on the Court dropped by 0.25 from March 2018 to July 2023, while the proportion of respondents with unfavorable opinions increased by 0.25. Overall, public opinion on the Supreme Court across all political ideologies has become significantly less favorable/more unfavorable over time (the ten most recent Pew Research Center’s American Trends Panel Waves that asked this tracking question).
