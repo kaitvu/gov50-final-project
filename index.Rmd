@@ -240,7 +240,7 @@ names <- list("(Intercept)" = "Intercept (Conservative)",
 ```{r}
 plotreg(fit1,
         custom.title = "Regression of Public Opinion on SCOTUS",
-        custom.coef.map = dict)
+        custom.coef.map = names)
 ```
 
 ```{r}
