@@ -9,7 +9,7 @@ output:
 
 Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can observe via regression. If I observe a larger decrease in favorable approval ratings for the Supreme Court among liberals than conservatives over the time period, this would support my hypothesis. On the other hand, If I observe a larger increase in favorable approval ratings for the Supreme Court among conservatives than liberals, this would provide evidence against my hypothesis.
 
-```{r, echo = FALSE}
+```{r}
 library(haven)
 library(tidyverse)
 library(dplyr)
@@ -18,7 +18,7 @@ library(texreg)
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 july19 <- read_sav("data/W52_Jul19/ATP W52.sav")
 
 july19 <- july19 |>
@@ -58,7 +58,7 @@ july19 <- july19 |>
 
 
 
-```{r, echo = FALSE}
+```{r}
 jan20 <- read_sav("data/W59_Jan20/ATP W59.sav")
 
 jan20 <- jan20 |>
@@ -98,7 +98,7 @@ jan20 <- jan20 |>
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 july20 <- read_sav("data/W71_Jul20/ATP W71.sav")
 
 july20 <- july20 |>
@@ -137,7 +137,7 @@ july20 <- july20 |>
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 april21 <- read_sav("data/W87_Apr21/ATP W87.sav")
 
 april21 <- april21 |>
@@ -176,7 +176,7 @@ april21 <- april21 |>
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 jan22 <- read_sav("data/W101_Jan22/ATP W101.sav")
 
 jan22 <- jan22 |>
