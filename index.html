@@ -1538,153 +1538,56 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<pre><code>
+Call:
+lm(formula = scotus_opinion ~ political_ideology + education + 
+    income + age + race + gender, data = daf)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-5.333 -1.982 -1.244 -0.365 97.259 
+
+Coefficients:
+                             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                   3.74689    0.34744  10.784  &lt; 2e-16 ***
+political_ideologyLiberal     0.67624    0.17312   3.906 9.40e-05 ***
+political_ideologyModerate   -0.13319    0.16113  -0.827  0.40848    
+educationHigh School or Less  0.81621    0.19285   4.232 2.32e-05 ***
+educationSome College         0.11962    0.15929   0.751  0.45269    
+income                       -0.08485    0.02782  -3.049  0.00229 ** 
+age30-49                     -0.03245    0.22081  -0.147  0.88316    
+age50-64                     -0.30909    0.22787  -1.356  0.17497    
+age65+                       -0.57182    0.23639  -2.419  0.01557 *  
+raceAsian American           -0.35323    0.36810  -0.960  0.33727    
+raceMixed Race               -0.85773    0.35143  -2.441  0.01467 *  
+raceOther                    -0.53654    0.34558  -1.553  0.12054    
+raceWhite                    -0.62190    0.20664  -3.010  0.00262 ** 
+genderWoman                   1.17868    0.13412   8.788  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 10.83 on 27752 degrees of freedom
+Multiple R-squared:  0.00755,   Adjusted R-squared:  0.007085 
+F-statistic: 16.24 on 13 and 27752 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d1_pc</span> <span class='op'>&lt;-</span> <span class='va'>d1</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>date</span> <span class='op'>==</span> <span class='st'>"Jan22"</span> <span class='op'>|</span> <span class='va'>date</span> <span class='op'>==</span> <span class='st'>"July19"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>political_ideology</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>pivot_wider</span><span class='op'>(</span></span>
-<span>    names_from <span class='op'>=</span> <span class='va'>date</span>, </span>
-<span>    values_from <span class='op'>=</span> <span class='va'>prop</span></span>
-<span>    <span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>mutate</span><span class='op'>(</span>prt_change <span class='op'>=</span> <span class='op'>(</span><span class='va'>Jan22</span> <span class='op'>-</span> <span class='va'>July19</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>July19</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>prt_change</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>dict</span></span>
 <span></span>
-<span><span class='va'>d1_pc</span> <span class='op'>|&gt;</span></span>
-<span>   <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Percent Change in Favorable Opinion by Political Ideology"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Political Ideology"</span>, <span class='st'>"Percent Change"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<caption><span id="tab:unnamed-chunk-9">Table 1: </span>Percent Change in Favorable Opinion by Political Ideology</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Political Ideology</th>
-<th style="text-align: right;">Percent Change</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Conservative</td>
-<td style="text-align: right;">3.62</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Liberal</td>
-<td style="text-align: right;">-16.73</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Moderate</td>
-<td style="text-align: right;">6.13</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d2_pc</span> <span class='op'>&lt;-</span> <span class='va'>d2</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>date</span> <span class='op'>==</span> <span class='st'>"Jan22"</span> <span class='op'>|</span> <span class='va'>date</span> <span class='op'>==</span> <span class='st'>"July19"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>political_ideology</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>pivot_wider</span><span class='op'>(</span></span>
-<span>    names_from <span class='op'>=</span> <span class='va'>date</span>, </span>
-<span>    values_from <span class='op'>=</span> <span class='va'>prop</span></span>
-<span>    <span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>mutate</span><span class='op'>(</span>prt_change <span class='op'>=</span> <span class='op'>(</span><span class='va'>Jan22</span> <span class='op'>-</span> <span class='va'>July19</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>July19</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>prt_change</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>d2_pc</span> <span class='op'>|&gt;</span></span>
-<span>   <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Percent Change in Unfavorable Opinion by Political Ideology"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Political Ideology"</span>, <span class='st'>"Percent Change"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<caption><span id="tab:unnamed-chunk-10">Table 2: </span>Percent Change in Unfavorable Opinion by Political Ideology</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Political Ideology</th>
-<th style="text-align: right;">Percent Change</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Conservative</td>
-<td style="text-align: right;">23.89</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Liberal</td>
-<td style="text-align: right;">-12.16</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Moderate</td>
-<td style="text-align: right;">2.93</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>For this project, the null hypothesis states that there is no relationship between respondents identifying as liberal and decreasing favorability in public opinion on the Court over time.</p>
-<p>From July 2019 to January 2022, favorable public opinion on the Supreme Court increased by 3.62% among conservative respondents and 6.13% among moderate respondents while decreasing by 16.7% among liberal respondents. Examining changes in favorable public opinion, we reject the null hypothesis in favor of the hypothesis as there is a higher percent decrease in favorable public opinion among liberals than conservatives.</p>
-<p>However, unfavorable public opinion on the Supreme Court increased by 23.89% among conservative respondents and 2.93% among moderate respondents while decreasing by 12.16% among liberal respondents. These results are contradictory with those of favorable public opinion: there’s a higher percent increase in unfavorable public opinion among conservatives than liberals.</p>
-<p>Since there are contradictory conclusions about the hypothesis depending on if unfavorable or favorable public opinions are analyzed, there seems to be no clear conclusive relationship between political ideology and changes in public opinion of the Supreme Court - at least within the selected five Pew Research Center’s American Trends Panel Waves.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d3_pc</span> <span class='op'>&lt;-</span> <span class='va'>d3</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>Date</span>, <span class='va'>unfav_prop</span>, <span class='va'>fav_prop</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>pivot_wider</span><span class='op'>(</span></span>
-<span>    names_from <span class='op'>=</span> <span class='va'>Date</span>, </span>
-<span>    values_from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>unfav_prop</span>, <span class='va'>fav_prop</span><span class='op'>)</span></span>
-<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>summarize</span><span class='op'>(</span></span>
-<span>    pct_change_f <span class='op'>=</span> <span class='op'>(</span><span class='va'>fav_prop_July23</span> <span class='op'>-</span> <span class='va'>fav_prop_Mar18</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>fav_prop_Mar18</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span>,</span>
-<span>    pct_change_uf <span class='op'>=</span> <span class='op'>(</span><span class='va'>unfav_prop_July23</span> <span class='op'>-</span> <span class='va'>unfav_prop_Mar18</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>unfav_prop_Mar18</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span></span>
-<span>  <span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>d3_pc</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Percent Change in Public Opinion on the Supreme Court"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Percent Change in Favorable Public Opinion"</span>, <span class='st'>"Percent Change in Unfavorable Public Opinion"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<caption><span id="tab:unnamed-chunk-13">Table 3: </span>Percent Change in Public Opinion on the Supreme Court</caption>
-<colgroup>
-<col style="width: 48%" />
-<col style="width: 51%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Percent Change in Favorable Public Opinion</th>
-<th style="text-align: right;">Percent Change in Unfavorable Public Opinion</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">-35.26</td>
-<td style="text-align: right;">83.12</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>d3_lm_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>fav_prop</span> <span class='op'>~</span> <span class='va'>Date</span>, data <span class='op'>=</span> <span class='va'>d3</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>d3_lm_f</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Mar18'</span>,<span class='st'>'Jan19'</span>,<span class='st'>'July19'</span>, <span class='st'>'Jan20'</span>, <span class='st'>'July20'</span>, <span class='st'>'April21'</span>, <span class='st'>'Jan22'</span>, <span class='st'>'Aug22'</span>, <span class='st'>'Mar23'</span>, <span class='st'>'July23'</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>d3_lm_f</span> <span class='op'>|&gt;</span></span>
+<span><span class='va'>fit1</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
 <span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
 <span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span></span>
-<span>    caption <span class='op'>=</span> <span class='st'>"Regression of Favorable Public Opinion"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"Regression of Public Opinion on SCOTUS"</span>,</span>
 <span>    col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Date"</span>, <span class='st'>"Estimate"</span><span class='op'>)</span>,</span>
 <span>    digits <span class='op'>=</span> <span class='fl'>2</span></span>
 <span>    <span class='op'>)</span></span></code></pre>
 </div>
 <table>
-<caption><span id="tab:unnamed-chunk-14">Table 4: </span>Regression of Favorable Public Opinion</caption>
+<caption><span id="tab:unnamed-chunk-9">Table 1: </span>Regression of Public Opinion on SCOTUS</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Date</th>
@@ -1693,116 +1596,65 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Mar18</td>
-<td style="text-align: right;">0.70</td>
+<td style="text-align: left;">Intercept (Conservative)</td>
+<td style="text-align: right;">3.75</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Jan19</td>
-<td style="text-align: right;">0.02</td>
+<td style="text-align: left;">Liberal</td>
+<td style="text-align: right;">0.68</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">July19</td>
-<td style="text-align: right;">-0.01</td>
+<td style="text-align: left;">Moderate</td>
+<td style="text-align: right;">-0.13</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Jan20</td>
+<td style="text-align: left;">High School or Less</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Some College</td>
+<td style="text-align: right;">0.12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Income</td>
+<td style="text-align: right;">-0.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ages 30-49</td>
 <td style="text-align: right;">-0.03</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">July20</td>
-<td style="text-align: right;">0.01</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">April21</td>
-<td style="text-align: right;">-0.04</td>
+<td style="text-align: left;">Ages 50-64</td>
+<td style="text-align: right;">-0.31</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Jan22</td>
-<td style="text-align: right;">-0.15</td>
+<td style="text-align: left;">Ages 65+</td>
+<td style="text-align: right;">-0.57</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Aug22</td>
-<td style="text-align: right;">-0.21</td>
+<td style="text-align: left;">Mixed Race</td>
+<td style="text-align: right;">-0.35</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Mar23</td>
-<td style="text-align: right;">-0.21</td>
+<td style="text-align: left;">Asian American</td>
+<td style="text-align: right;">-0.86</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">July23</td>
-<td style="text-align: right;">-0.25</td>
+<td style="text-align: left;">Other Race</td>
+<td style="text-align: right;">-0.54</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">-0.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Woman</td>
+<td style="text-align: right;">1.18</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d3_lm_uf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>unfav_prop</span> <span class='op'>~</span> <span class='va'>Date</span>, data <span class='op'>=</span> <span class='va'>d3</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>d3_lm_uf</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Mar18'</span>,<span class='st'>'Jan19'</span>,<span class='st'>'July19'</span>, <span class='st'>'Jan20'</span>, <span class='st'>'July20'</span>, <span class='st'>'April21'</span>, <span class='st'>'Jan22'</span>, <span class='st'>'Aug22'</span>, <span class='st'>'Mar23'</span>, <span class='st'>'July23'</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>d3_lm_uf</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span></span>
-<span>    caption <span class='op'>=</span> <span class='st'>"Regression of Unfavorable Public Opinion"</span>,</span>
-<span>    col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Date"</span>, <span class='st'>"Estimate"</span><span class='op'>)</span>,</span>
-<span>    digits <span class='op'>=</span> <span class='fl'>2</span></span>
-<span>    <span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<caption><span id="tab:unnamed-chunk-15">Table 5: </span>Regression of Unfavorable Public Opinion</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Date</th>
-<th style="text-align: right;">Estimate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Mar18</td>
-<td style="text-align: right;">0.30</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Jan19</td>
-<td style="text-align: right;">-0.02</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">July19</td>
-<td style="text-align: right;">0.01</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Jan20</td>
-<td style="text-align: right;">0.03</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">July20</td>
-<td style="text-align: right;">-0.01</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">April21</td>
-<td style="text-align: right;">0.04</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Jan22</td>
-<td style="text-align: right;">0.15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Aug22</td>
-<td style="text-align: right;">0.21</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mar23</td>
-<td style="text-align: right;">0.21</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">July23</td>
-<td style="text-align: right;">0.25</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>From March 2018 to July 2023, favorable opinion on the Supreme Court decreased by 35.26% while unfavorable opinion increased by 83.12% across all political ideologies. According to the linear regressions, the proportion of residents with favorable opinions on the Court dropped by 0.25 from March 2018 to July 2023, while the proportion of respondents with unfavorable opinions increased by 0.25. Overall, public opinion on the Supreme Court across all political ideologies has become significantly less favorable/more unfavorable over time (the ten most recent Pew Research Center’s American Trends Panel Waves that asked this tracking question).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
