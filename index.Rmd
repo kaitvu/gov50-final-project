@@ -7,9 +7,12 @@ output:
     self_contained: false
 ---
 
-Over the past decade, how has political ideology affected changes in public approval of the Supreme Court? In my final project, I plan to examine the relationship between political partisanship and public opinion of the Supreme Court.  I hypothesize that individuals who identify as liberal (Democrats) are more likely to disapprove of the Court than those that identify as conservative (Republican). For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. I’m planning to work with survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022). The data set has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). My explanatory variable of interest is the political ideology of the respondents. My outcome variable is changes in the favorability of respondents’ opinion towards the Supreme Court (based on political ideology), which I can observe via regression. If I observe a larger decrease in favorable approval ratings for the Supreme Court among liberals than conservatives over the time period, this would support my hypothesis. On the other hand, If I observe a larger increase in favorable approval ratings for the Supreme Court among conservatives than liberals, this would provide evidence against my hypothesis.
+## Introduction
+How does political ideology affect public approval of the Supreme Court? In this final project, I examine the extent to which political ideology affects public opinion on the Supreme Court. I hypothesize that individuals who identify as liberal are more likely to disapprove of the Court than those that identify as conservative. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion. 
 
-```{r}
+My explanatory variable of interest is the political ideology of the respondents (political_ideology), while my outcome variable is the favorability of respondents' opinion towards the Supreme Court (scotus_opinion). If I observe greater unfavorable approval ratings for the Supreme Court among liberals than conservatives on average, that would support my hypothesis. On the other hand, If I observe greater unfavorable approval ratings among conservatives than liberals on average, that would provide evidence against my hypothesis. As such, when I run my regression, a positive and significant coefficient would support my hypothesis.
+
+```{r, echo = FALSE}
 library(haven)
 library(tidyverse)
 library(dplyr)
@@ -18,7 +21,7 @@ library(texreg)
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 july19 <- read_sav("data/W52_Jul19/ATP W52.sav")
 
 july19 <- july19 |>
@@ -58,7 +61,7 @@ july19 <- july19 |>
 
 
 
-```{r}
+```{r, echo = FALSE}
 jan20 <- read_sav("data/W59_Jan20/ATP W59.sav")
 
 jan20 <- jan20 |>
@@ -98,7 +101,7 @@ jan20 <- jan20 |>
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 july20 <- read_sav("data/W71_Jul20/ATP W71.sav")
 
 july20 <- july20 |>
@@ -137,7 +140,7 @@ july20 <- july20 |>
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 april21 <- read_sav("data/W87_Apr21/ATP W87.sav")
 
 april21 <- april21 |>
@@ -176,7 +179,7 @@ april21 <- april21 |>
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 jan22 <- read_sav("data/W101_Jan22/ATP W101.sav")
 
 jan22 <- jan22 |>
@@ -214,12 +217,108 @@ jan22 <- jan22 |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
 ```
 
+## Data
+The project uses survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022).  The American Trend Panel is an online survey: survey respondents that are randomly selected through address-based sampling of households from the U.S. Postal Service’s Delivery Sequence File. To ensure that the survey is also representative of Americans who do not have access to the internet, the Pew Research Center provides non-internet households with tablets, which they could use to complete the online survey. The survey was completed by 4,175 adult respondents in Wave 52, 12,638 respondents in Wave 59, 11,001 respondents in Wave 71, 5,109 respondents in Wave 87, and 5,128 respondents in Wave 101. 
 
-```{r}
+The survey has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court—the project will focus on responses from the last five waves that asked this question (2019-2022). For that question, respondents are asked to rate their approval on a 1-4 scale with 1 as “Very Favorable,” 2 as “Mostly Favorable,” 3 as “Mostly Unfavorable,” and 4 as “Very Unfavorable.” In addition, the survey records political partisanship by asking respondents to indicate if they are “Republican/Republican Leaning,” “Democrat/Democrat Leaning”, “Independent/No Leaning” or “Don’t Know/Refused/No Lean.” The research design was a cross-sectional observational study since the survey measures public opinion on the Supreme Court at one specific moment in time. In addition, the opinion of respondents was recorded and observed; respondents were not deliberately separated into control and treatment groups for the survey. 
+
+Figure 1 summarizes public opinion on the Supreme Court by political ideology, measuring favorable (Table 1) and unfavorable opinion (Table 2) through percentage of survey respondents. Regardless of political ideology, it appears that the majority of survey respondents have favorable opinions of the Supreme Court. Examining public opinion differences between liberal and conservative respondents: compared to 57.03% of liberal respondents, 76.80% of conservative respondents hold favorable opinions of the Supreme Court. On the other hand, 42.97% of liberal respondents and 23.20% of conservatives hold unfavorable opinions of the Court.
+
+```{r, echo = FALSE}
 d1 <- rbind.data.frame(july19, jan20, july20, april21, jan22)
-fit1 <- lm(scotus_opinion ~ political_ideology + education + income + age + race + gender, data = d1)
 
-names <- list("(Intercept)" = "Intercept (Conservative)",
+t0 <- d1 |>
+  filter(!(scotus_opinion == 99)) |>
+  mutate(scotus_opinion = case_when(scotus_opinion <= 2 ~ "Favorable", 
+                                    scotus_opinion >= 3 ~ "Unfavorable")) |>
+  group_by(political_ideology) |>
+  count(scotus_opinion) |>
+  mutate(pct = n / sum(n) * 100)
+
+t1 <- t0 |>
+  filter(scotus_opinion == "Favorable") |>
+  select(political_ideology, pct)
+
+t1 |>
+  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), digits = 2, caption = "Favorable Public Opinion on Supreme Court by Political Ideology")
+
+```
+
+
+```{r, echo = FALSE}
+t2 <- t0 |>
+  filter(scotus_opinion == "Unfavorable") |>
+  select(political_ideology, pct)
+
+t2 |>
+  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), digits = 2, caption = "Unfavorable Public Opinion on Supreme Court by Political Ideology")
+
+```
+
+
+```{r, echo = FALSE}
+
+t0 |>
+  ggplot(mapping = aes(x = scotus_opinion, y = pct, fill = political_ideology)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(name = "Political Ideology", values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
+  labs(
+    x = "Public Opinion on Supreme Court", 
+    y = "Percentage of Respondents", 
+    title = "Favorability of Public Opinion on Supreme Court by Political Ideology"
+  )
+```
+
+Table 3 and Figure 2 summarize the mean survey rating of the Supreme Court by political ideology. Liberal respondents have the highest mean survey rating of 2.45, which means that they have the most unfavorable opinion of the Court on average. Conservative respondents have the lowest mean survey rating among political ideologies at 2.17.
+
+```{r, echo = FALSE}
+t3 <- d1 |>
+  filter(!(scotus_opinion == 99)) |>
+  group_by(political_ideology) |>
+  summarize(mean = mean(scotus_opinion))
+
+t3 |>
+  knitr::kable(col.names = c("Political Ideology", "Mean Rating"), digits = 2, caption = "Mean Approval Rating of Supreme Court by Political Ideology")
+
+t3 |>
+  ggplot(mapping = aes(x = political_ideology, y = mean)) + 
+  geom_col() +
+  labs(
+    x = "Political Ideology",
+    y = "Mean Rating", 
+    title = "Mean Approval Rating of Supreme Court by Political Ideology"
+  ) +
+  ylim(0,3)
+```
+
+## Results
+
+The following primary variable regression (Table 4) expresses the relationship between political ideology and public opinion of the Supreme Court.
+
+```{r, echo = FALSE}
+d2 <- rbind.data.frame(july19, jan20, july20, april21, jan22)
+fit1 <- lm(scotus_opinion ~ political_ideology, data = d2)
+
+names1 <- list("(Intercept)" = "Intercept (Conservative)",
+             "political_ideologyLiberal" = "Liberal", 
+             "political_ideologyModerate" = "Moderate")
+
+modelsummary::modelsummary(fit1,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"),
+                           coef_map = names1,
+                           title = "Primary Variable Regression of Public Opinion on SCOTUS")
+```
+
+The main coefficient of interest is “Liberal” given that “Conservative” is represented by the intercept. This regression shows that on average, public opinion ratings among liberal respondents are 0.83 higher than conservatives, increasing up the 1-4 scale towards “Very Unfavorable.” Thus, liberals are more likely than conservatives to have unfavorable or less favorable opinions of the Supreme Court. Regarding statistical significance, the p-value of the coefficient of interest is <0.001. Since the p-value is less than $\alpha$ of 0.05, it seems to be statistically significant. 
+
+To address potential confounders, the following multi-variable regression (Table 5 and Figure 3) includes demographic factors such as education, income, age, race, and gender.
+
+```{r, echo = FALSE}
+fit2 <- lm(scotus_opinion ~ political_ideology + education + income + age + race + gender, data = d2)
+
+names2 <- list("(Intercept)" = "Intercept (Conservative)",
              "political_ideologyLiberal" = "Liberal", 
              "political_ideologyModerate" = "Moderate", 
              "educationHigh School or Less" = "High School or Less", 
@@ -234,28 +333,25 @@ names <- list("(Intercept)" = "Intercept (Conservative)",
              "raceWhite" = "White",
              "genderWoman" = "Woman")
 
+modelsummary::modelsummary(fit2,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"), 
+                           coef_map = names2,
+                           title = "Multi-Variable Regression of Public Opinion on SCOTUS")
 ```
 
 
-```{r}
-plotreg(fit1,
+```{r, echo = FALSE}
+plotreg(fit2,
         custom.title = "Regression of Public Opinion on SCOTUS",
-        custom.coef.map = names)
+        custom.coef.map = names2)
 ```
+According to this regression, on average, public opinion ratings among liberal respondents are 0.68 higher than conservatives. This result is slightly smaller than the primary variable regression, adjusting for a number of potentially confounding demographic factors. The p-value for the coefficient of interest is <0.001, which is significantly less than $\alpha$ of 0.05. This means that the estimated coefficient is statistically significant. 
 
-```{r}
-names(fit1$coefficients) <- names
+At least within the context of this combined data set with the 5 selected American Trend Panel waves, I believe that identifying as liberal has a causal effect on increasingly unfavorable public opinion of the Supreme Court. Survey respondents were selected randomly based on the Pew Research Center's methodology, and the coefficient of interest was positive and significant in both regressions. Additionally, the multi-variable regression which for potential confounders on the relationship between political ideology and public opinion on the Supreme Court such as education, income, age, race, and gender. 
 
-fit1 |>
-  broom::tidy() |> 
-  select(term, estimate) |> 
-  knitr::kable(
-    caption = "Regression of Public Opinion on SCOTUS",
-    col.names = c("Date", "Estimate"),
-    digits = 2
-    )
-```
+## Conclusion
+In sum, this final project used data from Pew Research Center’s American Trends Panel Waves 52, 59, 71, 87, and 101 to analyze the effect of political ideology on public opinion of the Supreme Court. As discussed in the results section, it seems that liberals are more likely than conservatives to have unfavorable opinions of the Supreme Court: public opinion ratings among liberal respondents are higher than conservatives in both of the regressions, increasing up the survey's 1-4 scale towards “Very Unfavorable." The coefficient of interest is statistically significant with $\alpha$ of 0.05 in both the primary variable and multi-variable regressions. Therefore, the findings appear to support the hypothesis. 
 
-For context: in the Pew Research Center’s American Trends Panel, the question of interest (“Do you have a favorable or unfavorable opinion of the Supreme Court?”) is measured on a 1-4 scale with 1 as "Very Favorable" and 4 as "Very Unfavorable." 
-
-The regression above holds demographic factors such as education, income, age, race, and gender constant. On average, public opinion ratings among liberal respondents are 0.68 higher than conservatives (increasing up the 1-4 scale towards "Very Unfavorable"). Thus, liberals are more likely than conservatives to have increasingly unfavorable (less favorable) opinions of the Supreme Court over time—this finding supports the hypothesis.
+However, I only analyzed 5 waves of American Trends Panel that were conducted at relatively irregular periods from 2019 to 2022; sampling methodology and other logistical and/or administrative disparities may exist between the different surveys. Threats to causal inference may include additional confounding variables that were not controlled for in the regression analysis—geographic location, for example. I could improve upon this analysis by expanding my data set to include more waves of the American Trends Panel as well as controlling for more demographic variables in the regression analysis in order to control for potential confounding variables.
