@@ -238,7 +238,9 @@ t1 <- t0 |>
   select(political_ideology, pct)
 
 t1 |>
-  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), digits = 2, caption = "Favorable Public Opinion on Supreme Court by Political Ideology")
+  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), 
+               digits = 2, 
+               caption = "Favorable Public Opinion on Supreme Court by Political Ideology")
 
 ```
 
@@ -249,7 +251,9 @@ t2 <- t0 |>
   select(political_ideology, pct)
 
 t2 |>
-  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), digits = 2, caption = "Unfavorable Public Opinion on Supreme Court by Political Ideology")
+  knitr::kable(col.names = c("Political Ideology", "Percentage of Respondents"), 
+               digits = 2, 
+               caption = "Unfavorable Public Opinion on Supreme Court by Political Ideology")
 
 ```
 
@@ -259,7 +263,8 @@ t2 |>
 t0 |>
   ggplot(mapping = aes(x = scotus_opinion, y = pct, fill = political_ideology)) +
   geom_col(position = "dodge") +
-  scale_fill_manual(name = "Political Ideology", values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
+  scale_fill_manual(name = "Political Ideology", 
+                    values = c(Liberal = "steelblue1", Conservative = "indianred1", Moderate = "gold2")) +
   labs(
     x = "Public Opinion on Supreme Court", 
     y = "Percentage of Respondents", 
@@ -276,7 +281,9 @@ t3 <- d1 |>
   summarize(mean = mean(scotus_opinion))
 
 t3 |>
-  knitr::kable(col.names = c("Political Ideology", "Mean Rating"), digits = 2, caption = "Mean Survey Rating of Supreme Court by Political Ideology")
+  knitr::kable(col.names = c("Political Ideology", "Mean Rating"), 
+               digits = 2, 
+               caption = "Mean Survey Rating of Supreme Court by Political Ideology")
 
 t3 |>
   ggplot(mapping = aes(x = political_ideology, y = mean)) + 
