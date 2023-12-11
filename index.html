@@ -1521,7 +1521,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="introduction">Introduction</h2>
 <p>How does political ideology affect public approval of the Supreme Court? In this final project, I examine the extent to which political ideology affects public opinion on the Supreme Court. I hypothesize that individuals who identify as liberal are more likely to disapprove of the Court than those that identify as conservative. For context, the Supreme Court is now more conservative than it has ever been in the past 90 years: with the appointment and confirmation of three conservative-leaning justices, former President Donald Trump filled more seats in a single term than any president since Franklin Delano Roosevelt. As such, a majority of Americans currently feel a disconnect from the Court as recent controversial decisions on topics such as abortion, environmental regulations, and affirmative action appear to run contrary to popular opinion.</p>
-<p>My explanatory variable of interest is the political ideology of the respondents (labeled as <code>political_ideology</code> in the dataset), while my outcome variable is the favorability of respondents’ opinion towards the Supreme Court (labeled as <code>scotus_opinion</code>). If I observe greater unfavorable approval ratings for the Supreme Court among liberals than conservatives on average, that would support my hypothesis. On the other hand, if I observe greater unfavorable approval ratings among conservatives than liberals on average, that would provide evidence against my hypothesis.</p>
+<p>My explanatory variable of interest is the political ideology of the respondents (labeled as <code>political_ideology</code> in the dataset), while my outcome variable is the favorability of respondents’ opinion towards the Supreme Court (labeled as <code>scotus_opinion</code>). As a note, the terms “public opinion” and “approval rating” are used interchangeably in this project. If I observe greater unfavorable approval ratings for the Supreme Court among liberals than conservatives on average, that would support my hypothesis. On the other hand, if I observe greater unfavorable approval ratings among conservatives than liberals on average, that would provide evidence against my hypothesis. When I run the regression on political ideology and Supreme Court public opinion, a positive, significant coefficient would support my hypothesis.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://haven.tidyverse.org'>haven</a></span><span class='op'>)</span></span>
@@ -1829,10 +1829,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>t3</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Political Ideology"</span>, <span class='st'>"Mean Rating"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span>, caption <span class='op'>=</span> <span class='st'>"Mean Approval Rating of Supreme Court by Political Ideology"</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Political Ideology"</span>, <span class='st'>"Mean Rating"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span>, caption <span class='op'>=</span> <span class='st'>"Mean Survey Rating of Supreme Court by Political Ideology"</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
-<caption><span id="tab:unnamed-chunk-10">Table 3: </span>Mean Approval Rating of Supreme Court by Political Ideology</caption>
+<caption><span id="tab:unnamed-chunk-10">Table 3: </span>Mean Survey Rating of Supreme Court by Political Ideology</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Political Ideology</th>
@@ -1861,7 +1861,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
 <span>    x <span class='op'>=</span> <span class='st'>"Political Ideology"</span>,</span>
 <span>    y <span class='op'>=</span> <span class='st'>"Mean Rating"</span>, </span>
-<span>    title <span class='op'>=</span> <span class='st'>"Mean Approval Rating of Supreme Court by Political Ideology"</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Mean Survey Rating of Supreme Court by Political Ideology"</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
