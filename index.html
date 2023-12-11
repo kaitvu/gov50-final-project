@@ -1567,7 +1567,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>age</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>gender</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>income</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>july19</span> <span class='op'>&lt;-</span> <span class='va'>july19</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2019</span>,</span>
+<span>        month <span class='op'>=</span> <span class='fl'>7</span>,</span>
+<span>        month_year <span class='op'>=</span> <span class='st'>"July19"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -1606,7 +1611,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>age</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>gender</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>income</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>jan20</span> <span class='op'>&lt;-</span> <span class='va'>jan20</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2020</span>,</span>
+<span>        month <span class='op'>=</span> <span class='fl'>1</span>,</span>
+<span>        month_year <span class='op'>=</span> <span class='st'>"Jan20"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -1645,7 +1655,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>age</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>gender</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>income</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>july20</span> <span class='op'>&lt;-</span> <span class='va'>july20</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2020</span>,</span>
+<span>        month <span class='op'>=</span> <span class='fl'>7</span>,</span>
+<span>        month_year <span class='op'>=</span> <span class='st'>"July20"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -1684,7 +1699,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>age</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>gender</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>income</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>april21</span> <span class='op'>&lt;-</span> <span class='va'>april21</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2021</span>,</span>
+<span>        month <span class='op'>=</span> <span class='fl'>4</span>,</span>
+<span>        month_year <span class='op'>=</span> <span class='st'>"April21"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -1723,16 +1743,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>age</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>gender</span> <span class='op'>==</span> <span class='st'>"Not Disclosed"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>income</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span>, <span class='va'>political_ideology</span>, <span class='va'>education</span>, <span class='va'>age</span>, <span class='va'>race</span>, <span class='va'>gender</span>, <span class='va'>income</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>jan22</span> <span class='op'>&lt;-</span> <span class='va'>jan22</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2022</span>,</span>
+<span>        month <span class='op'>=</span> <span class='fl'>1</span>,</span>
+<span>        month_year <span class='op'>=</span> <span class='st'>"Jan22"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <h2 id="data">Data</h2>
 <p>The project uses survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022), which is combined into a single data set. The American Trend Panel is an online-based survey: survey respondents are randomly selected through address-based sampling of households from the U.S. Postal Service’s Delivery Sequence File. To ensure that the survey is also representative of Americans who do not have access to the internet, the Pew Research Center provides non-internet households with tablets, which they could use to complete the online survey. The survey was completed by 4,175 adult respondents in Wave 52, 12,638 respondents in Wave 59, 11,001 respondents in Wave 71, 5,109 respondents in Wave 87, and 5,128 respondents in Wave 101.</p>
-<p>The survey has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court. Specifically, my project will include data from the last five waves that asked this question (2019-2022). For that question, respondents are asked to rate their approval on a 1-4 scale with 1 as “Very Favorable,” 2 as “Mostly Favorable,” 3 as “Mostly Unfavorable,” and 4 as “Very Unfavorable.” In addition, the survey records political ideology by asking respondents to indicate if they are “Republican/Republican Leaning,” “Democrat/Democrat Leaning”, “Independent/No Leaning” or “Don’t Know/Refused/No Lean.” The research design was a cross-sectional observational study since the survey measures approval of the Supreme Court at one specific moment in time. In addition, the opinion of respondents was simply recorded and observed; respondents were not deliberately separated into control and treatment groups for the survey.</p>
+<p>The survey has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court. Specifically, my project will include data from the last five waves that asked this question (2019-2022). For that question, respondents are asked to rate their approval on a 1-4 scale with 1 as “Very Favorable,” 2 as “Mostly Favorable,” 3 as “Mostly Unfavorable,” and 4 as “Very Unfavorable.” In addition, the survey records political ideology by asking respondents to indicate if they are “Republican/Republican Leaning,” “Democrat/Democrat Leaning”, “Independent/No Leaning” or “Don’t Know/Refused/No Lean.” The research design was a time-series cross-sectional study: it’s cross sectional because Supreme Court approval was measured at one specific moment in time for each survey, and time-series since the project includes data from 5 waves conducted at different months/years. In addition, the opinion of respondents was simply recorded and observed; respondents were not deliberately separated into control and treatment groups for the survey.</p>
 <p>Figure 1 summarizes public opinion on the Supreme Court by political ideology, measuring favorable (Table 1) and unfavorable opinion (Table 2) through percentage of survey respondents. Regardless of political ideology, it appears that the majority of survey respondents have favorable opinions of the Supreme Court. Examining differences in approval between liberal and conservative respondents: compared to 57.03% of liberal respondents, 76.80% of conservative respondents hold favorable opinions of the Supreme Court. On the other hand, 42.97% of liberal respondents and 23.20% of conservatives hold unfavorable opinions of the Court.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind.data.frame</a></span><span class='op'>(</span><span class='va'>july19</span>, <span class='va'>jan20</span>, <span class='va'>july20</span>, <span class='va'>april21</span>, <span class='va'>jan22</span><span class='op'>)</span></span>
+<span><span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='va'>d1</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>    fct_month_year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>month_year</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"July19"</span>, <span class='st'>"Jan20"</span>, <span class='st'>"July20"</span>, <span class='st'>"April21"</span>, <span class='st'>"Jan22"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>t0</span> <span class='op'>&lt;-</span> <span class='va'>d1</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='op'>(</span><span class='va'>scotus_opinion</span> <span class='op'>==</span> <span class='fl'>99</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -1878,8 +1907,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The following single-variable regression (Table 4) expresses the relationship between political ideology and public opinion of the Supreme Court.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>d2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind.data.frame</a></span><span class='op'>(</span><span class='va'>july19</span>, <span class='va'>jan20</span>, <span class='va'>july20</span>, <span class='va'>april21</span>, <span class='va'>jan22</span><span class='op'>)</span></span>
-<span><span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span> <span class='op'>~</span> <span class='va'>political_ideology</span>, data <span class='op'>=</span> <span class='va'>d2</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span> <span class='op'>~</span> <span class='va'>political_ideology</span>, </span>
+<span>           data <span class='op'>=</span> <span class='va'>d1</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>names1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept (Conservative)"</span>,</span>
 <span>             <span class='st'>"political_ideologyLiberal"</span> <span class='op'>=</span> <span class='st'>"Liberal"</span>, </span>
@@ -2000,10 +2029,11 @@ R2 Adj.
 </table>
 </div>
 <p>The main coefficient of interest is “Liberal” given that “Conservative” is represented by the intercept. This regression shows that on average, public opinion ratings among liberal respondents are 0.83 higher than conservatives, increasing up the 1-4 scale towards “Very Unfavorable.” Thus, liberals are more likely than conservatives to have unfavorable or less favorable opinions of the Supreme Court. Regarding statistical significance, the p-value of the coefficient of interest is &lt;0.001. Since the p-value is less than <span class="math inline">\(\alpha\)</span> of 0.05, the coefficient appears to be statistically significant.</p>
-<p>To address potential confounders, the following multi-variable regression (Table 5 and Figure 3) includes demographic factors such as education, income, age, race, and gender.</p>
+<p>To address potential confounders, the following multi-variable regression (Table 5 and Figure 3) includes demographic factors such as education, income, age, race, and gender. It also includes the month/year of that each wave was conducted.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span> <span class='op'>~</span> <span class='va'>political_ideology</span> <span class='op'>+</span> <span class='va'>education</span> <span class='op'>+</span> <span class='va'>income</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>race</span> <span class='op'>+</span> <span class='va'>gender</span>, data <span class='op'>=</span> <span class='va'>d2</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>scotus_opinion</span> <span class='op'>~</span> <span class='va'>political_ideology</span> <span class='op'>+</span> <span class='va'>education</span> <span class='op'>+</span> <span class='va'>income</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>race</span> <span class='op'>+</span> <span class='va'>gender</span> <span class='op'>+</span> <span class='va'>fct_month_year</span>, </span>
+<span>           data <span class='op'>=</span> <span class='va'>d1</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>names2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept (Conservative)"</span>,</span>
 <span>             <span class='st'>"political_ideologyLiberal"</span> <span class='op'>=</span> <span class='st'>"Liberal"</span>, </span>
@@ -2018,7 +2048,11 @@ R2 Adj.
 <span>             <span class='st'>"raceAsian American"</span> <span class='op'>=</span> <span class='st'>"Asian American"</span>,</span>
 <span>             <span class='st'>"raceOther"</span> <span class='op'>=</span> <span class='st'>"Other Race"</span>,</span>
 <span>             <span class='st'>"raceWhite"</span> <span class='op'>=</span> <span class='st'>"White"</span>,</span>
-<span>             <span class='st'>"genderWoman"</span> <span class='op'>=</span> <span class='st'>"Woman"</span><span class='op'>)</span></span>
+<span>             <span class='st'>"genderWoman"</span> <span class='op'>=</span> <span class='st'>"Woman"</span>, </span>
+<span>             <span class='st'>"fct_month_yearJan20"</span> <span class='op'>=</span> <span class='st'>"Jan20"</span>, </span>
+<span>             <span class='st'>"fct_month_yearJuly20"</span> <span class='op'>=</span> <span class='st'>"July20"</span>,</span>
+<span>             <span class='st'>"fct_month_yearApril21"</span> <span class='op'>=</span> <span class='st'>"April21"</span>, </span>
+<span>             <span class='st'>"factor_month_yearJan22"</span> <span class='op'>=</span> <span class='st'>"Jan22"</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fit2</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
@@ -2046,14 +2080,14 @@ R2 Adj.
 Intercept (Conservative)
 </td>
 <td style="text-align:center;">
-3.747
+3.803
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.347
+s.e. = 0.427
 </td>
 </tr>
 <tr>
@@ -2068,7 +2102,7 @@ p = &lt;0.001
 Liberal
 </td>
 <td style="text-align:center;">
-0.676
+0.686
 </td>
 </tr>
 <tr>
@@ -2090,7 +2124,7 @@ p = &lt;0.001
 Moderate
 </td>
 <td style="text-align:center;">
-−0.133
+−0.129
 </td>
 </tr>
 <tr>
@@ -2104,7 +2138,7 @@ s.e. = 0.161
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.408
+p = 0.424
 </td>
 </tr>
 <tr>
@@ -2112,14 +2146,14 @@ p = 0.408
 High School or Less
 </td>
 <td style="text-align:center;">
-0.816
+0.794
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.193
+s.e. = 0.194
 </td>
 </tr>
 <tr>
@@ -2134,7 +2168,7 @@ p = &lt;0.001
 Some College
 </td>
 <td style="text-align:center;">
-0.120
+0.116
 </td>
 </tr>
 <tr>
@@ -2148,7 +2182,7 @@ s.e. = 0.159
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.453
+p = 0.466
 </td>
 </tr>
 <tr>
@@ -2156,7 +2190,7 @@ p = 0.453
 Income
 </td>
 <td style="text-align:center;">
-−0.085
+−0.081
 </td>
 </tr>
 <tr>
@@ -2170,7 +2204,7 @@ s.e. = 0.028
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.002
+p = 0.004
 </td>
 </tr>
 <tr>
@@ -2200,7 +2234,7 @@ p = 0.883
 Ages 50-64
 </td>
 <td style="text-align:center;">
-−0.309
+−0.300
 </td>
 </tr>
 <tr>
@@ -2214,7 +2248,7 @@ s.e. = 0.228
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.175
+p = 0.188
 </td>
 </tr>
 <tr>
@@ -2222,7 +2256,7 @@ p = 0.175
 Ages 65+
 </td>
 <td style="text-align:center;">
-−0.572
+−0.565
 </td>
 </tr>
 <tr>
@@ -2236,7 +2270,7 @@ s.e. = 0.236
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.016
+p = 0.017
 </td>
 </tr>
 <tr>
@@ -2244,21 +2278,21 @@ p = 0.016
 Mixed Race
 </td>
 <td style="text-align:center;">
-−0.858
+−0.836
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.351
+s.e. = 0.352
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.015
+p = 0.017
 </td>
 </tr>
 <tr>
@@ -2266,21 +2300,21 @@ p = 0.015
 Asian American
 </td>
 <td style="text-align:center;">
-−0.353
+−0.371
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.368
+s.e. = 0.369
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.337
+p = 0.315
 </td>
 </tr>
 <tr>
@@ -2288,7 +2322,7 @@ p = 0.337
 Other Race
 </td>
 <td style="text-align:center;">
-−0.537
+−0.523
 </td>
 </tr>
 <tr>
@@ -2302,7 +2336,7 @@ s.e. = 0.346
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.121
+p = 0.130
 </td>
 </tr>
 <tr>
@@ -2310,21 +2344,21 @@ p = 0.121
 White
 </td>
 <td style="text-align:center;">
-−0.622
+−0.594
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.207
+s.e. = 0.209
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.003
+p = 0.004
 </td>
 </tr>
 <tr>
@@ -2332,7 +2366,7 @@ p = 0.003
 Woman
 </td>
 <td style="text-align:center;">
-1.179
+1.180
 </td>
 </tr>
 <tr>
@@ -2343,10 +2377,76 @@ s.e. = 0.134
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jan20
+</td>
+<td style="text-align:center;">
+0.015
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.284
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.958
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+July20
+</td>
+<td style="text-align:center;">
+−0.275
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+April21
+</td>
+<td style="text-align:center;">
+−0.111
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.294
+</td>
+</tr>
+<tr>
 <td style="text-align:left;box-shadow: 0px 1.5px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
-p = &lt;0.001
+p = 0.704
 </td>
 </tr>
 <tr>
@@ -2384,10 +2484,10 @@ R2 Adj.
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
 </div>
-<p>According to this regression, on average, public opinion ratings among liberal respondents are 0.68 higher than conservatives. This result is slightly smaller than the primary variable regression, adjusting for a number of potentially confounding demographic factors. The p-value for the coefficient of interest is &lt;0.001, which is significantly less than <span class="math inline">\(\alpha\)</span> of 0.05. This means that the estimated coefficient appears to be statistically significant.</p>
-<p>At least within the context of this combined data set with the 5 selected American Trend Panel waves, I believe that identifying as liberal has a causal effect on increasingly unfavorable public opinion of the Supreme Court. Survey respondents were selected randomly based on the Pew Research Center’s methodology, and the coefficient of interest was positive and significant in both regressions. Additionally, the multi-variable regression controlled for potential confounders including education, income, age, race, and gender.</p>
+<p>According to this regression, on average, public opinion ratings among liberal respondents are 0.69 higher than conservatives. This result is slightly smaller than the primary variable regression, adjusting for a number of potentially confounding demographic factors as well as month/year the different waves were conducted. The p-value for the coefficient of interest is &lt;0.001, which is significantly less than <span class="math inline">\(\alpha\)</span> of 0.05. This means that the estimated coefficient appears to be statistically significant.</p>
+<p>However, I believe that you can’t establish a causal effect between identifying as liberal and increasingly unfavorable public opinion of the Supreme Court. Although survey respondents were selected randomly based on the Pew Research Center’s methodology, individual respondents’ party ideology and approval of the Supreme Court could be influenced by common confounders.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>In sum, this final project used data from Pew Research Center’s American Trends Panel Waves 52, 59, 71, 87, and 101 to analyze the effect of political ideology on public opinion of the Supreme Court. As discussed in the results section, it seems that liberals are more likely than conservatives to have unfavorable opinions of the Supreme Court: public opinion ratings among liberal respondents are higher than conservatives in both of the regressions, increasing up the survey’s 1-4 scale towards “Very Unfavorable.” The coefficient of interest is statistically significant with <span class="math inline">\(\alpha\)</span> of 0.05 in both the primary variable and multi-variable regressions. Therefore, the findings appear to support the hypothesis.</p>
+<p>In sum, this final project used data from Pew Research Center’s American Trends Panel Waves 52, 59, 71, 87, and 101 to analyze the effect of political ideology on public opinion of the Supreme Court. As discussed in the results section, it seems that liberals are more likely than conservatives to have unfavorable opinions of the Supreme Court within the context of the project’s data set: public opinion ratings among liberal respondents are higher than conservatives in both of the regressions, increasing up the survey’s 1-4 scale towards “Very Unfavorable.” The coefficient of interest is statistically significant with <span class="math inline">\(\alpha\)</span> of 0.05 in both the primary variable and multi-variable regressions. Therefore, the findings appear to support the hypothesis.</p>
 <p>However, I only analyzed 5 waves of American Trends Panel that were conducted at relatively irregular periods from 2019 to 2022; sampling methodology and other logistical and/or administrative disparities may exist between the different surveys. Threats to causal inference may include additional confounding variables that were not controlled for in the regression analysis—geographic location, for example. I could improve upon this analysis by expanding my data set to include more waves of the American Trends Panel as well as controlling for more demographic variables in the regression analysis in order to control for additional confounders.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

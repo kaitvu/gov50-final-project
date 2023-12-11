@@ -56,6 +56,11 @@ july19 <- july19 |>
   filter(!(gender == "Not Disclosed")) |>
   filter(!(income == 99)) |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
+
+july19 <- july19 |>
+  mutate(year = 2019,
+        month = 7,
+        month_year = "July19")
 ```
 
 
@@ -96,6 +101,11 @@ jan20 <- jan20 |>
   filter(!(income == 99)) |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
 
+jan20 <- jan20 |>
+  mutate(year = 2020,
+        month = 1,
+        month_year = "Jan20")
+
 ```
 
 
@@ -135,6 +145,11 @@ july20 <- july20 |>
   filter(!(gender == "Not Disclosed")) |>
   filter(!(income == 99)) |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
+
+july20 <- july20 |>
+  mutate(year = 2020,
+        month = 7,
+        month_year = "July20")
 ```
 
 
@@ -174,6 +189,11 @@ april21 <- april21 |>
   filter(!(gender == "Not Disclosed")) |>
   filter(!(income == 99)) |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
+
+april21 <- april21 |>
+  mutate(year = 2021,
+        month = 4,
+        month_year = "April21")
 ```
 
 
@@ -213,17 +233,26 @@ jan22 <- jan22 |>
   filter(!(gender == "Not Disclosed")) |>
   filter(!(income == 99)) |>
   select(scotus_opinion, political_ideology, education, age, race, gender, income)
+
+jan22 <- jan22 |>
+  mutate(year = 2022,
+        month = 1,
+        month_year = "Jan22")
 ```
 
 ## Data
 The project uses survey data from Pew Research Center’s American Trends Panel Waves 52 (July 2019), 59 (January 2020), 71 (July 2020), 87 (April 21), and 101 (January 2022), which is combined into a single data set.  The American Trend Panel is an online-based survey: survey respondents are randomly selected through address-based sampling of households from the U.S. Postal Service’s Delivery Sequence File. To ensure that the survey is also representative of Americans who do not have access to the internet, the Pew Research Center provides non-internet households with tablets, which they could use to complete the online survey. The survey was completed by 4,175 adult respondents in Wave 52, 12,638 respondents in Wave 59, 11,001 respondents in Wave 71, 5,109 respondents in Wave 87, and 5,128 respondents in Wave 101. 
 
-The survey has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court. Specifically, my project will include data from the last five waves that asked this question (2019-2022). For that question, respondents are asked to rate their approval on a 1-4 scale with 1 as “Very Favorable,” 2 as “Mostly Favorable,” 3 as “Mostly Unfavorable,” and 4 as “Very Unfavorable.” In addition, the survey records political ideology by asking respondents to indicate if they are “Republican/Republican Leaning,” “Democrat/Democrat Leaning”, “Independent/No Leaning” or “Don’t Know/Refused/No Lean.” The research design was a cross-sectional observational study since the survey measures approval of the Supreme Court at one specific moment in time. In addition, the opinion of respondents was simply recorded and observed; respondents were not deliberately separated into control and treatment groups for the survey.
+The survey has a tracking question (“Do you have a favorable or unfavorable opinion of each of the following?”) that asks respondents for their approval of the various governmental institutions, of which includes the Supreme Court. Specifically, my project will include data from the last five waves that asked this question (2019-2022). For that question, respondents are asked to rate their approval on a 1-4 scale with 1 as “Very Favorable,” 2 as “Mostly Favorable,” 3 as “Mostly Unfavorable,” and 4 as “Very Unfavorable.” In addition, the survey records political ideology by asking respondents to indicate if they are “Republican/Republican Leaning,” “Democrat/Democrat Leaning”, “Independent/No Leaning” or “Don’t Know/Refused/No Lean.” The research design was a time-series cross-sectional study: it's cross sectional because Supreme Court approval was measured at one specific moment in time for each survey, and time-series since the project includes data from 5 waves conducted at different months/years. In addition, the opinion of respondents was simply recorded and observed; respondents were not deliberately separated into control and treatment groups for the survey.
 
 Figure 1 summarizes public opinion on the Supreme Court by political ideology, measuring favorable (Table 1) and unfavorable opinion (Table 2) through percentage of survey respondents. Regardless of political ideology, it appears that the majority of survey respondents have favorable opinions of the Supreme Court. Examining differences in approval between liberal and conservative respondents: compared to 57.03% of liberal respondents, 76.80% of conservative respondents hold favorable opinions of the Supreme Court. On the other hand, 42.97% of liberal respondents and 23.20% of conservatives hold unfavorable opinions of the Court.
 
 ```{r}
 d1 <- rbind.data.frame(july19, jan20, july20, april21, jan22)
+d1 <- d1 |>
+  mutate(
+    fct_month_year = factor(month_year, levels = c("July19", "Jan20", "July20", "April21", "Jan22"))
+  )
 
 t0 <- d1 |>
   filter(!(scotus_opinion == 99)) |>
@@ -301,8 +330,8 @@ t3 |>
 The following single-variable regression (Table 4) expresses the relationship between political ideology and public opinion of the Supreme Court.
 
 ```{r}
-d2 <- rbind.data.frame(july19, jan20, july20, april21, jan22)
-fit1 <- lm(scotus_opinion ~ political_ideology, data = d2)
+fit1 <- lm(scotus_opinion ~ political_ideology, 
+           data = d1)
 
 names1 <- list("(Intercept)" = "Intercept (Conservative)",
              "political_ideologyLiberal" = "Liberal", 
@@ -318,10 +347,11 @@ modelsummary::modelsummary(fit1,
 
 The main coefficient of interest is “Liberal” given that “Conservative” is represented by the intercept. This regression shows that on average, public opinion ratings among liberal respondents are 0.83 higher than conservatives, increasing up the 1-4 scale towards “Very Unfavorable.” Thus, liberals are more likely than conservatives to have unfavorable or less favorable opinions of the Supreme Court. Regarding statistical significance, the p-value of the coefficient of interest is <0.001. Since the p-value is less than $\alpha$ of 0.05, the coefficient appears to be statistically significant. 
 
-To address potential confounders, the following multi-variable regression (Table 5 and Figure 3) includes demographic factors such as education, income, age, race, and gender.
+To address potential confounders, the following multi-variable regression (Table 5 and Figure 3) includes demographic factors such as education, income, age, race, and gender. It also includes the month/year of that each wave was conducted.
 
 ```{r}
-fit2 <- lm(scotus_opinion ~ political_ideology + education + income + age + race + gender, data = d2)
+fit2 <- lm(scotus_opinion ~ political_ideology + education + income + age + race + gender + fct_month_year, 
+           data = d1)
 
 names2 <- list("(Intercept)" = "Intercept (Conservative)",
              "political_ideologyLiberal" = "Liberal", 
@@ -336,7 +366,11 @@ names2 <- list("(Intercept)" = "Intercept (Conservative)",
              "raceAsian American" = "Asian American",
              "raceOther" = "Other Race",
              "raceWhite" = "White",
-             "genderWoman" = "Woman")
+             "genderWoman" = "Woman", 
+             "fct_month_yearJan20" = "Jan20", 
+             "fct_month_yearJuly20" = "July20",
+             "fct_month_yearApril21" = "April21", 
+             "factor_month_yearJan22" = "Jan22")
 
 modelsummary::modelsummary(fit2,
                            statistic = c("s.e. = {std.error}",
@@ -352,11 +386,11 @@ plotreg(fit2,
         custom.title = "Multi-Variable Regression of Public Opinion on SCOTUS",
         custom.coef.map = names2)
 ```
-According to this regression, on average, public opinion ratings among liberal respondents are 0.68 higher than conservatives. This result is slightly smaller than the primary variable regression, adjusting for a number of potentially confounding demographic factors. The p-value for the coefficient of interest is <0.001, which is significantly less than $\alpha$ of 0.05. This means that the estimated coefficient appears to be statistically significant. 
+According to this regression, on average, public opinion ratings among liberal respondents are 0.69 higher than conservatives. This result is slightly smaller than the primary variable regression, adjusting for a number of potentially confounding demographic factors as well as month/year the different waves were conducted. The p-value for the coefficient of interest is <0.001, which is significantly less than $\alpha$ of 0.05. This means that the estimated coefficient appears to be statistically significant. 
 
-At least within the context of this combined data set with the 5 selected American Trend Panel waves, I believe that identifying as liberal has a causal effect on increasingly unfavorable public opinion of the Supreme Court. Survey respondents were selected randomly based on the Pew Research Center's methodology, and the coefficient of interest was positive and significant in both regressions. Additionally, the multi-variable regression controlled for potential confounders including education, income, age, race, and gender. 
+However, I believe that you can't establish a causal effect between identifying as liberal and increasingly unfavorable public opinion of the Supreme Court. Although survey respondents were selected randomly based on the Pew Research Center's methodology, individual respondents' party ideology and approval of the Supreme Court could be influenced by common confounders.
 
 ## Conclusion
-In sum, this final project used data from Pew Research Center’s American Trends Panel Waves 52, 59, 71, 87, and 101 to analyze the effect of political ideology on public opinion of the Supreme Court. As discussed in the results section, it seems that liberals are more likely than conservatives to have unfavorable opinions of the Supreme Court: public opinion ratings among liberal respondents are higher than conservatives in both of the regressions, increasing up the survey's 1-4 scale towards “Very Unfavorable." The coefficient of interest is statistically significant with $\alpha$ of 0.05 in both the primary variable and multi-variable regressions. Therefore, the findings appear to support the hypothesis. 
+In sum, this final project used data from Pew Research Center’s American Trends Panel Waves 52, 59, 71, 87, and 101 to analyze the effect of political ideology on public opinion of the Supreme Court. As discussed in the results section, it seems that liberals are more likely than conservatives to have unfavorable opinions of the Supreme Court within the context of the project's data set: public opinion ratings among liberal respondents are higher than conservatives in both of the regressions, increasing up the survey's 1-4 scale towards “Very Unfavorable." The coefficient of interest is statistically significant with $\alpha$ of 0.05 in both the primary variable and multi-variable regressions. Therefore, the findings appear to support the hypothesis. 
 
 However, I only analyzed 5 waves of American Trends Panel that were conducted at relatively irregular periods from 2019 to 2022; sampling methodology and other logistical and/or administrative disparities may exist between the different surveys. Threats to causal inference may include additional confounding variables that were not controlled for in the regression analysis—geographic location, for example. I could improve upon this analysis by expanding my data set to include more waves of the American Trends Panel as well as controlling for more demographic variables in the regression analysis in order to control for additional confounders.
