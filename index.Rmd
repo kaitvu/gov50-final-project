@@ -370,7 +370,7 @@ names2 <- list("(Intercept)" = "Intercept (Conservative)",
              "fct_month_yearJan20" = "Jan20", 
              "fct_month_yearJuly20" = "July20",
              "fct_month_yearApril21" = "April21", 
-             "factor_month_yearJan22" = "Jan22")
+             "fct_month_yearJan22" = "Jan22")
 
 modelsummary::modelsummary(fit2,
                            statistic = c("s.e. = {std.error}",
